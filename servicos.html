@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexum HD — Soluções Digitais | Mestrado em Humanidades Digitais · UMinho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--bg-soft:#f7f4fb;--purple-deep:#3d1f6b;--purple:#6b3fa0;--purple-mid:#9064ab;--purple-light:#c5a8df;--purple-tint:#f0e8fa;--purple-tint2:#f5ecf8;--wine:#8A2A30;--text:#1a1028;--text-body:#3d3060;--text-muted:#7a6e90;--border:#e8e0f0;--border-strong:#cebde8;--shadow-md:0 8px 32px rgba(61,31,107,.10);--shadow-lg:0 20px 60px rgba(61,31,107,.14);--r:12px;--r-lg:18px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg-soft)}::-webkit-scrollbar-thumb{background:var(--purple-light);border-radius:5px}
+/* PROMO */
+.promo-bar{background:linear-gradient(90deg,var(--purple-deep),var(--purple-mid));color:#fff;padding:.55rem 5%;text-align:center;font-size:.8rem;font-weight:500;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.promo-bar strong{font-weight:700}.promo-bar a{color:rgba(255,255,255,.85);text-decoration:underline;cursor:pointer}
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;padding:0 5%}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+.nav-logo-svg{width:48px;height:48px;flex-shrink:0}
+.nav-logo-name{font-weight:800;font-size:1.05rem;letter-spacing:.08em;color:var(--purple-deep)}
+.nav-logo-sub{font-size:.6rem;font-weight:500;letter-spacing:.05em;color:var(--text-muted);text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:2px;list-style:none}
+.nav-links li a{font-size:.83rem;font-weight:500;color:var(--text-body);text-decoration:none;padding:.45rem .85rem;border-radius:8px;transition:background .18s,color .18s;white-space:nowrap}
+.nav-links li a:hover{background:var(--purple-tint);color:var(--purple)}
+.nav-links li a.active{background:var(--purple-tint);color:var(--purple);font-weight:600}
+.nav-cta{background:var(--purple-deep)!important;color:#fff!important;font-weight:700!important;padding:.5rem 1.2rem!important;border-radius:8px!important;box-shadow:0 2px 14px rgba(61,31,107,.25)}
+.nav-cta:hover{background:var(--purple)!important}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;border-radius:2px;transition:.3s}
+/* HERO */
+.hero{background:linear-gradient(155deg,var(--purple-deep) 0%,#5c2e90 55%,var(--purple-mid) 100%);color:#fff;padding:5.5rem 5% 5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 85% 15%,rgba(255,255,255,.07) 0%,transparent 45%),radial-gradient(ellipse at 15% 85%,rgba(138,42,48,.18) 0%,transparent 50%)}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:64px;background:var(--bg);clip-path:ellipse(55% 100% at 50% 100%)}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:100px;padding:.3rem 1rem;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.88);margin-bottom:1.5rem}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:700;line-height:1.12;letter-spacing:-.02em;margin-bottom:1.25rem}
+.hero h1 em{font-style:italic;color:rgba(255,255,255,.72)}
+.hero p{font-size:1rem;color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:2rem;max-width:480px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--purple-deep);padding:.8rem 1.75rem;border-radius:10px;font-weight:700;font-size:.9rem;border:none;cursor:pointer;text-decoration:none;transition:transform .18s,box-shadow .18s;display:inline-flex;align-items:center;gap:.4rem;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.22)}
+.btn-ghost-white{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.35);color:#fff;padding:.8rem 1.75rem;border-radius:10px;font-weight:600;font-size:.9rem;cursor:pointer;text-decoration:none;transition:background .18s,border-color .18s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-ghost-white:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.6)}
+/* HERO STATS CARD */
+.hero-stats-card{background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.18);border-radius:var(--r-lg);padding:2rem}
+.hero-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.hero-stat{background:rgba(255,255,255,.1);border-radius:var(--r);padding:1rem;text-align:center}
+.hero-stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#fff;line-height:1;display:block}
+.hero-stat-label{font-size:.72rem;color:rgba(255,255,255,.7);margin-top:.25rem}
+.hero-stat-main{background:rgba(255,255,255,.15);border-radius:var(--r);padding:1.25rem;text-align:center}
+.hero-main-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:#fff;line-height:1;display:block}
+/* LAYOUT */
+.container{max-width:1200px;margin:0 auto;padding:0 5%}
+section{padding:5rem 5%}
+.s-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem}
+.s-eyebrow::before{content:'';width:22px;height:2px;background:var(--purple)}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(1.75rem,3vw,2.5rem);font-weight:700;line-height:1.2;color:var(--text);margin-bottom:.9rem}
+.s-title em{font-style:italic;color:var(--purple)}
+.s-desc{font-size:.97rem;color:var(--text-muted);max-width:580px;line-height:1.75}
+.s-header{margin-bottom:3.5rem}.s-header.center{text-align:center}
+.s-header.center .s-eyebrow{justify-content:center}.s-header.center .s-eyebrow::before{display:none}
+.s-header.center .s-desc{margin:0 auto}
+/* RESULTS */
+.results-intro{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:4rem}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-bottom:3.5rem}
+.metric-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r-lg);padding:1.5rem 1.25rem;text-align:center;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s}
+.metric-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--border-strong)}
+.metric-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--purple-mid))}
+.metric-icon{font-size:1.6rem;margin-bottom:.75rem;display:block}
+.metric-arrow{position:absolute;top:.9rem;right:.9rem;font-size:.72rem;font-weight:800;color:#16a34a;background:#f0fdf4;border-radius:6px;padding:.15rem .4rem}
+.metric-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--purple-deep);line-height:1;display:block}
+.metric-label{font-size:.78rem;color:var(--text-muted);margin-top:.3rem;line-height:1.4}
+.metric-detail{font-size:.72rem;color:#b0a8c0;margin-top:.5rem;font-style:italic}
+/* CHART */
+.chart-wrap{background:var(--bg-soft);border:1.5px solid var(--border-strong);border-radius:var(--r-lg);padding:1.75rem;position:relative;overflow:hidden}
+.chart-title{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:1.25rem}
+.chart-bars{display:flex;align-items:flex-end;gap:10px;height:140px;margin-bottom:1rem}
+.bar-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.bar{width:100%;border-radius:6px 6px 0 0;min-width:24px}
+.bar.before{background:linear-gradient(to top,#d4c5e8,#e8dff4)}
+.bar.after{background:linear-gradient(to top,var(--purple),var(--purple-mid))}
+.bar-label{font-size:.67rem;font-weight:600;color:var(--text-muted)}
+.chart-legend{display:flex;gap:1.5rem;justify-content:center}
+.legend-item{display:flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:500;color:var(--text-muted)}
+.legend-dot{width:10px;height:10px;border-radius:3px}
+/* CASE STUDIES */
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3.5rem}
+.case-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:transform .2s,box-shadow .2s}
+.case-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.case-img{height:130px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;border-bottom:1px solid var(--border)}
+.case-body{padding:1.25rem}
+.case-tag{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:.5rem}
+.case-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+.case-desc{font-size:.82rem;color:var(--text-muted);line-height:1.65;margin-bottom:1rem}
+.case-stats{display:flex;gap:.75rem;flex-wrap:wrap}
+.case-chip{background:var(--purple-tint);border:1px solid var(--border-strong);border-radius:8px;padding:.2rem .6rem;font-size:.72rem;font-weight:700;color:var(--purple-deep);display:flex;align-items:center;gap:.25rem}
+.up{color:#16a34a}
+/* SERVICES */
+.services-bg{background:var(--bg-soft)}
+.tabs-nav{display:flex;gap:.5rem;border-bottom:2px solid var(--border);margin-bottom:3rem;overflow-x:auto;scrollbar-width:none;padding-bottom:0}
+.tabs-nav::-webkit-scrollbar{display:none}
+.tab-btn{display:flex;align-items:center;gap:.5rem;padding:.75rem 1.2rem;border:none;background:none;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:500;color:var(--text-muted);cursor:pointer;border-bottom:2.5px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:color .18s,border-color .18s;border-radius:8px 8px 0 0}
+.tab-btn:hover{color:var(--purple);background:var(--purple-tint)}
+.tab-btn.active{color:var(--purple-deep);font-weight:700;border-bottom-color:var(--purple-deep);background:var(--purple-tint)}
+.tab-panel{display:none}.tab-panel.active{display:block;animation:fadeUp .35s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.svc-layout{display:grid;grid-template-columns:1fr 360px;gap:3rem;align-items:start}
+.svc-tag{display:inline-flex;align-items:center;gap:.4rem;background:var(--purple-tint);color:var(--purple);border:1px solid var(--border-strong);border-radius:100px;padding:.25rem .85rem;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.25rem}
+.svc-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.5vw,2rem);font-weight:700;margin-bottom:.9rem;color:var(--text)}
+.svc-title em{font-style:italic;color:var(--purple)}
+.svc-lead{font-size:1rem;color:var(--text-body);line-height:1.8;margin-bottom:2rem;border-left:3px solid var(--purple-light);padding-left:1rem}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+.detail-box{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.1rem}
+.detail-label{font-size:.67rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:.4rem}
+.detail-text{font-size:.84rem;color:var(--text-body);line-height:1.7}
+.feat-list{list-style:none;margin-bottom:2rem}
+.feat-list li{display:flex;align-items:flex-start;gap:.75rem;padding:.55rem 0;border-bottom:1px solid var(--border);font-size:.87rem;color:var(--text-body)}
+.feat-list li:last-child{border-bottom:none}
+.feat-list li::before{content:'';width:18px;height:18px;border-radius:50%;background:var(--purple-tint);border:1.5px solid var(--purple-light);display:block;flex-shrink:0;margin-top:2px;background-image:url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='%236b3fa0' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;background-size:10px}
+.tech-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.chip{background:var(--purple-tint2);border:1px solid var(--border);border-radius:6px;padding:.25rem .7rem;font-size:.74rem;font-weight:500;color:var(--purple-deep)}
+/* SIDEBAR */
+.sidebar-card{background:#fff;border:1.5px solid var(--border-strong);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-md);position:sticky;top:86px}
+.sidebar-header{background:linear-gradient(135deg,var(--purple-deep),var(--purple-mid));color:#fff;padding:1.5rem}
+.sidebar-header h4{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:.2rem}
+.sidebar-header p{font-size:.8rem;opacity:.78}
+.sidebar-from{font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.7;display:block;margin-top:1rem}
+.sidebar-price{font-size:1.9rem;font-weight:800;line-height:1}
+.sidebar-price span{font-size:.82rem;font-weight:400;opacity:.7}
+.sidebar-body{padding:1.25rem}
+.sidebar-feats{list-style:none;margin-bottom:1.25rem}
+.sidebar-feats li{display:flex;gap:.6rem;font-size:.83rem;color:var(--text-body);padding:.35rem 0;border-bottom:1px solid var(--border)}
+.sidebar-feats li:last-child{border-bottom:none}
+.sidebar-feats li .ck{color:var(--purple);flex-shrink:0}
+.btn-full{display:block;width:100%;padding:.85rem;background:var(--purple-deep);color:#fff;border:none;border-radius:10px;font-family:'Inter',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:background .18s,transform .15s;text-align:center;margin-bottom:.75rem}
+.btn-full:hover{background:var(--purple);transform:translateY(-1px)}
+.btn-full-ghost{display:block;width:100%;padding:.8rem;background:transparent;color:var(--purple);border:1.5px solid var(--border-strong);border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:.87rem;cursor:pointer;transition:border-color .18s,background .18s;text-align:center}
+.btn-full-ghost:hover{border-color:var(--purple);background:var(--purple-tint)}
+.sidebar-note{font-size:.73rem;color:var(--text-muted);margin-top:1rem;padding-top:.75rem;border-top:1px solid var(--border);display:flex;gap:.4rem;align-items:center}
+/* PORTFOLIO */
+.port-bg{background:var(--bg-soft)}
+.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.port-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:transform .2s,box-shadow .2s}
+.port-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.port-img{height:170px;display:flex;align-items:center;justify-content:center;font-size:3rem;border-bottom:1px solid var(--border)}
+.port-body{padding:1.4rem}
+.port-tag{font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:.5rem}
+.port-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:.45rem}
+.port-desc{font-size:.83rem;color:var(--text-muted);line-height:1.65}
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.p-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r-lg);padding:2rem;position:relative;transition:transform .2s,box-shadow .2s,border-color .2s}
+.p-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--border-strong)}
+.p-card.featured{border-color:var(--purple);box-shadow:0 0 0 1px var(--purple),var(--shadow-lg)}
+.p-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--purple-deep);color:#fff;font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.28rem 1rem;border-radius:100px;white-space:nowrap}
+.p-tier{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:.5rem}
+.p-name{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
+.p-price{font-size:1.9rem;font-weight:800;color:var(--purple-deep);line-height:1;margin:.75rem 0 .25rem}
+.p-price span{font-size:.83rem;font-weight:400;color:var(--text-muted)}
+.p-desc{font-size:.82rem;color:var(--text-muted);line-height:1.6;padding-bottom:1.1rem;border-bottom:1px solid var(--border);margin-bottom:1.1rem}
+.p-feats{list-style:none;margin-bottom:1.75rem}
+.p-feats li{display:flex;gap:.6rem;font-size:.83rem;color:var(--text-body);padding:.3rem 0}
+.p-feats li .ck{color:var(--purple);flex-shrink:0}
+.btn-pp{display:block;width:100%;padding:.8rem;background:var(--purple-deep);color:#fff;border:none;border-radius:10px;font-family:'Inter',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;transition:background .18s,transform .15s}
+.btn-pp:hover{background:var(--purple);transform:translateY(-1px)}
+.btn-ppg{display:block;width:100%;padding:.75rem;background:transparent;color:var(--purple-deep);border:1.5px solid var(--border-strong);border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer;transition:border-color .18s,background .18s}
+.btn-ppg:hover{border-color:var(--purple);background:var(--purple-tint)}
+/* TEAM */
+.team-bg{background:var(--bg-soft)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;justify-items:center}
+.team-card{display:flex;flex-direction:column;align-items:center;text-align:center;width:100%}
+.photo-wrap{position:relative;margin-bottom:1.1rem}
+.photo-circle{width:120px;height:120px;border-radius:50%;overflow:hidden;position:relative;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(61,31,107,.14)}
+.photo-circle:hover{transform:scale(1.04);box-shadow:0 8px 32px rgba(61,31,107,.22)}
+.photo-circle img{width:100%;height:100%;object-fit:cover;display:none;position:absolute;inset:0}
+.photo-circle img.loaded{display:block}
+.photo-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transition:background .2s}
+.photo-circle:hover .photo-ph{filter:brightness(.95)}
+.ph-icon{font-size:1.6rem;opacity:.5}
+.ph-text{font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.55}
+.upload-input{display:none}
+.upload-btn{position:absolute;bottom:4px;right:4px;width:28px;height:28px;border-radius:50%;background:var(--purple);border:2.5px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .18s;z-index:2;box-shadow:0 2px 8px rgba(61,31,107,.3)}
+.upload-btn:hover{background:var(--purple-deep)}
+.team-name{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
+.team-role{font-size:.78rem;font-weight:600;color:var(--purple);margin-bottom:.2rem}
+.team-area{font-size:.75rem;color:var(--text-muted)}
+/* TESTIMONIALS */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.test-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r-lg);padding:1.75rem;transition:transform .2s,box-shadow .2s}
+.test-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.t-stars{color:#f59e0b;font-size:.82rem;margin-bottom:1rem}
+.t-text{font-size:.89rem;color:var(--text-body);line-height:1.8;margin-bottom:1.5rem;font-style:italic}
+.t-author{display:flex;gap:.75rem;align-items:center}
+.t-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.88rem;font-weight:700;flex-shrink:0}
+.t-name{font-size:.87rem;font-weight:700;color:var(--text)}
+.t-role{font-size:.74rem;color:var(--text-muted)}
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--purple-deep),var(--purple));color:#fff;text-align:center;padding:5rem 5%;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(255,255,255,.05) 0%,transparent 55%)}
+.cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;margin-bottom:1rem;position:relative}
+.cta-section p{font-size:1rem;color:rgba(255,255,255,.76);max-width:480px;margin:0 auto 2.5rem;position:relative}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+/* CONTACT */
+.contact-bg{background:var(--bg-soft)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:start}
+.c-item{display:flex;gap:.75rem;align-items:center;padding:1rem;background:#fff;border:1px solid var(--border);border-radius:var(--r);margin-bottom:.75rem}
+.c-icon{width:38px;height:38px;background:var(--purple-tint);border:1px solid var(--border-strong);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.c-lbl{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.18rem}
+.c-val{font-size:.88rem;font-weight:600;color:var(--text)}
+.form-card{background:#fff;border:1.5px solid var(--border-strong);border-radius:var(--r-lg);padding:2.25rem;box-shadow:var(--shadow-md)}
+.form-card h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin-bottom:1.75rem}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.f-g{margin-bottom:1rem}
+.f-lbl{display:block;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.4rem}
+.f-inp{width:100%;background:var(--bg-soft);border:1.5px solid var(--border);border-radius:9px;padding:.75rem .9rem;font-family:'Inter',sans-serif;font-size:.88rem;color:var(--text);outline:none;transition:border-color .18s}
+.f-inp:focus{border-color:var(--purple)}
+textarea.f-inp{min-height:110px;resize:vertical}
+.success-msg{display:none;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r);padding:1.25rem;margin-bottom:1.5rem;text-align:center}
+.social-row{display:flex;gap:.6rem;margin-top:1.75rem}
+.soc-a{width:40px;height:40px;background:#fff;border:1px solid var(--border);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:var(--purple-deep);text-decoration:none;transition:border-color .18s,background .18s}
+.soc-a:hover{border-color:var(--purple);background:var(--purple-tint)}
+/* FOOTER */
+footer{background:#1a1028;color:rgba(255,255,255,.78);padding:3.5rem 5% 2rem}
+.footer-top{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.1)}
+.f-logo{display:flex;align-items:center;gap:12px}
+.f-logo-name{font-weight:800;font-size:.95rem;color:#fff;letter-spacing:.06em}
+.f-logo-sub{font-size:.68rem;color:rgba(255,255,255,.45)}
+.f-links{display:flex;gap:1.75rem;flex-wrap:wrap}
+.f-links a{font-size:.82rem;color:rgba(255,255,255,.55);text-decoration:none;transition:color .18s}
+.f-links a:hover{color:var(--purple-light)}
+.footer-bottom{max-width:1200px;margin:1.5rem auto 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.78rem;color:rgba(255,255,255,.35)}
+/* ── SERVICE 2×2 GRID */
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.75rem}
+.svc-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r-lg);padding:2rem;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;display:flex;flex-direction:column;gap:0;position:relative;overflow:hidden}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--purple-mid));opacity:0;transition:opacity .2s}
+.svc-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:var(--border-strong)}
+.svc-card:hover::before{opacity:1}
+.svc-icon-wrap{width:52px;height:52px;background:var(--purple-tint);border:1px solid var(--border-strong);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem;flex-shrink:0}
+.svc-card-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:.65rem;line-height:1.25}
+.svc-card-desc{font-size:.875rem;color:var(--text-muted);line-height:1.75;margin-bottom:1.25rem;flex:1}
+.svc-card-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.4rem}
+.svc-card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:.9rem;border-top:1px solid var(--border);margin-top:auto}
+.svc-price-tag{font-size:.8rem;color:var(--text-muted)}
+.svc-price-tag strong{color:var(--purple-deep);font-weight:700}
+.svc-arrow{font-size:.82rem;font-weight:600;color:var(--purple);transition:transform .18s}
+.svc-card:hover .svc-arrow{transform:translateX(4px)}
+
+/* ── SERVICE MODAL */
+.modal-inner{padding:2.5rem}
+.modal-svc-tag{display:inline-flex;align-items:center;gap:.4rem;background:var(--purple-tint);color:var(--purple);border:1px solid var(--border-strong);border-radius:100px;padding:.25rem .85rem;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.1rem}
+.modal-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.5vw,2rem);font-weight:700;margin-bottom:.9rem}
+.modal-title em{font-style:italic;color:var(--purple)}
+.modal-lead{font-size:.97rem;color:var(--text-body);line-height:1.8;margin-bottom:2rem;border-left:3px solid var(--purple-light);padding-left:1rem}
+.modal-grid{display:grid;grid-template-columns:1fr 340px;gap:2.5rem;align-items:start}
+@media(max-width:768px){.modal-grid{grid-template-columns:1fr}}
+
+/* ── CASE VIDEO */
+.case-video-wrap{position:relative;background:var(--bg-soft);border-bottom:1px solid var(--border)}
+.case-video-placeholder{padding:2rem 1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;cursor:pointer;min-height:180px;transition:background .18s}
+.case-video-placeholder:hover{background:var(--purple-tint)}
+.vid-play-icon{width:56px;height:56px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(61,31,107,.12);margin-bottom:.25rem}
+.vid-label{font-size:.9rem;font-weight:700;color:var(--purple-deep)}
+.vid-sub{font-size:.75rem;color:var(--text-muted);text-align:center;max-width:220px}
+.vid-url-row{display:flex;gap:.5rem;padding:.75rem 1rem;background:#fff;border-top:1px solid var(--border)}
+.vid-url-input{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:.5rem .75rem;font-family:'Inter',sans-serif;font-size:.8rem;color:var(--text);outline:none;transition:border-color .18s}
+.vid-url-input:focus{border-color:var(--purple)}
+.vid-url-btn{background:var(--purple);color:#fff;border:none;border-radius:8px;padding:.5rem .9rem;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .18s}
+.vid-url-btn:hover{background:var(--purple-deep)}
+.vid-embed-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden}
+.vid-embed-wrap iframe,.vid-embed-wrap video{position:absolute;inset:0;width:100%;height:100%;border:none}
+
+/* ── WA */
+.wa-btn{position:fixed;bottom:2rem;right:2rem;z-index:500;width:54px;height:54px;border-radius:50%;background:#25D366;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .18s;text-decoration:none}
+.wa-btn:hover{transform:scale(1.1)}
+/* RESPONSIVE */
+@media(max-width:1024px){.hero-inner,.results-intro,.contact-grid{grid-template-columns:1fr}.sidebar-card{position:static}.metrics-grid{grid-template-columns:repeat(2,1fr)}.team-grid{grid-template-columns:repeat(2,1fr)}.pricing-grid,.case-grid,.test-grid,.port-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:block}.nav-links.open{display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:rgba(255,255,255,.98);border-bottom:1px solid var(--border);padding:1rem 5%;gap:2px;backdrop-filter:blur(16px);z-index:99}.metrics-grid{grid-template-columns:1fr 1fr}.svc-grid,.pricing-grid,.case-grid,.test-grid,.port-grid{grid-template-columns:1fr}.detail-grid,.f-row{grid-template-columns:1fr}.footer-top{flex-direction:column;gap:1.5rem}.footer-bottom{flex-direction:column;text-align:center}.hero-stat-row{grid-template-columns:1fr 1fr}.chart-bars{height:100px}.modal-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="promo-bar">✨ <strong>Diagnóstico digital gratuito</strong> para novas organizações culturais — <a onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Solicitar agora</a></div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <svg class="nav-logo-svg" viewBox="0 0 100 100" fill="none">
+        <!-- Interlocked NN shape with arrow — fiel ao logo NEXUM HD -->
+        <path d="M18 85 L18 35 L50 75 L50 25" stroke="#3d1f6b" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M50 25 L82 65 L82 15" stroke="#3d1f6b" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- loops / chains bottom -->
+        <path d="M18 70 Q10 82 20 88 Q32 94 36 80 L40 62 Q42 52 34 48 Q26 44 22 54" stroke="#3d1f6b" stroke-width="4.5" stroke-linecap="round" fill="none" opacity=".5"/>
+        <path d="M50 68 Q42 80 52 86 Q64 92 68 78 L72 60 Q74 50 66 46 Q58 42 54 52" stroke="#3d1f6b" stroke-width="4.5" stroke-linecap="round" fill="none" opacity=".4"/>
+        <!-- Arrow top-right -->
+        <path d="M68 15 L84 15 L84 31" stroke="#3d1f6b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <div class="nav-logo-name">NEXUM HD</div>
+        <div class="nav-logo-sub">Humanidades Digitais · UMinho</div>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#">Início</a></li>
+      <li><a href="#">Quem Somos</a></li>
+      <li><a href="#servicos" class="active">Serviços</a></li>
+      <li><a href="#portfolio">Portfólio</a></li>
+      <li><a href="#equipa">Equipa</a></li>
+      <li><a href="#contacto" class="nav-cta">Pedir Orçamento</a></li>
+    </ul>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><div class="hero-badge-dot"></div>Startup · Mestrado em Humanidades Digitais · UMinho</div>
+      <h1>Transformamos Cultura<br>em <em>Impacto Digital</em></h1>
+      <p>Somos a startup do Mestrado em Humanidades Digitais da Universidade do Minho. Desenvolvemos soluções digitais com base científica, pensamento crítico e inovação tecnológica para o setor cultural e criativo.</p>
+      <div class="hero-btns">
+        <button class="btn-white" onclick="document.getElementById('servicos').scrollIntoView({behavior:'smooth'})">Ver Serviços ↓</button>
+        <button class="btn-ghost-white" onclick="document.getElementById('resultados').scrollIntoView({behavior:'smooth'})">Resultados Reais →</button>
+      </div>
+    </div>
+    <div class="hero-stats-card">
+      <div class="hero-stat-row">
+        <div class="hero-stat"><span class="hero-stat-num" data-target="240">0</span><span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#fff;">%</span><div class="hero-stat-label">Crescimento médio em seguidores</div></div>
+        <div class="hero-stat"><span class="hero-stat-num" data-target="12">0</span><div class="hero-stat-label">Projetos entregues</div></div>
+      </div>
+      <div class="hero-stat-main">
+        <span class="hero-main-num" data-target="180">0</span><span style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:#fff;">%</span>
+        <div style="font-size:.78rem;color:rgba(255,255,255,.72);margin-top:.3rem;">Aumento médio de tráfego orgânico nos clientes</div>
+      </div>
+      <div style="margin-top:1rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.15);font-size:.75rem;color:rgba(255,255,255,.6);text-align:center;">Baseado em dados reais de clientes 2024–2025</div>
+    </div>
+  </div>
+</header>
+
+<!-- RESULTADOS -->
+<section style="background:var(--bg)" id="resultados">
+  <div class="container">
+    <div class="s-header">
+      <div class="s-eyebrow">Resultados Comprovados</div>
+      <h2 class="s-title">O nosso impacto em <em>números reais</em></h2>
+      <p class="s-desc">Dados de projetos reais desenvolvidos pela equipa Nexum HD junto de parceiros culturais, municipais e criativos.</p>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-card"><span class="metric-icon">📈</span><span class="metric-arrow">▲ +240%</span><span class="metric-num" data-target="240">0</span><span style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--purple-deep);">%</span><div class="metric-label">Crescimento em<br>seguidores sociais</div><div class="metric-detail">Média dos últimos 12 meses</div></div>
+      <div class="metric-card"><span class="metric-icon">🌐</span><span class="metric-arrow">▲ +180%</span><span class="metric-num" data-target="180">0</span><span style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--purple-deep);">%</span><div class="metric-label">Tráfego orgânico<br>no website</div><div class="metric-detail">Após auditoria + otimização</div></div>
+      <div class="metric-card"><span class="metric-icon">💬</span><span class="metric-arrow">▲ +310%</span><span class="metric-num" data-target="310">0</span><span style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--purple-deep);">%</span><div class="metric-label">Engagement<br>em conteúdos</div><div class="metric-detail">Likes, partilhas e comentários</div></div>
+      <div class="metric-card"><span class="metric-icon">🎯</span><span class="metric-arrow">▲ +95%</span><span class="metric-num" data-target="95">0</span><span style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--purple-deep);">%</span><div class="metric-label">Taxa de conversão<br>de leads</div><div class="metric-detail">Formulários e pedidos</div></div>
+    </div>
+    <!-- Intro + Chart -->
+    <div class="results-intro">
+      <div>
+        <div class="s-eyebrow">Como Crescemos os Nossos Clientes</div>
+        <h3 class="s-title" style="font-size:clamp(1.4rem,2.5vw,2rem);">Antes e depois de trabalhar<br>connosco — <em>resultados reais</em></h3>
+        <p style="font-size:.95rem;color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;">Cada projeto começa com um diagnóstico profundo e termina com métricas mensuráveis. Não prometemos crescimento — demonstramo-lo.</p>
+        <ul style="list-style:none;">
+          <li style="display:flex;gap:.75rem;align-items:flex-start;padding:.6rem 0;border-bottom:1px solid var(--border);"><span style="color:var(--purple);flex-shrink:0;">✓</span><span style="font-size:.88rem;color:var(--text-body);">Relatório de baseline antes de qualquer intervenção</span></li>
+          <li style="display:flex;gap:.75rem;align-items:flex-start;padding:.6rem 0;border-bottom:1px solid var(--border);"><span style="color:var(--purple);flex-shrink:0;">✓</span><span style="font-size:.88rem;color:var(--text-body);">KPIs definidos em conjunto com o cliente</span></li>
+          <li style="display:flex;gap:.75rem;align-items:flex-start;padding:.6rem 0;border-bottom:1px solid var(--border);"><span style="color:var(--purple);flex-shrink:0;">✓</span><span style="font-size:.88rem;color:var(--text-body);">Relatórios mensais de progresso com dados reais</span></li>
+          <li style="display:flex;gap:.75rem;align-items:flex-start;padding:.6rem 0;"><span style="color:var(--purple);flex-shrink:0;">✓</span><span style="font-size:.88rem;color:var(--text-body);">Ajustes estratégicos contínuos baseados em dados</span></li>
+        </ul>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">Média de crescimento por área (antes vs. com Nexum HD)</div>
+        <div class="chart-bars">
+          <div class="bar-wrap"><div class="bar before" style="height:28px;"></div><div class="bar after" style="height:95px;"></div><div class="bar-label">Instagram</div></div>
+          <div class="bar-wrap"><div class="bar before" style="height:34px;"></div><div class="bar after" style="height:95px;"></div><div class="bar-label">Website</div></div>
+          <div class="bar-wrap"><div class="bar before" style="height:20px;"></div><div class="bar after" style="height:88px;"></div><div class="bar-label">Engage.</div></div>
+          <div class="bar-wrap"><div class="bar before" style="height:40px;"></div><div class="bar after" style="height:78px;"></div><div class="bar-label">Leads</div></div>
+          <div class="bar-wrap"><div class="bar before" style="height:30px;"></div><div class="bar after" style="height:92px;"></div><div class="bar-label">Alcance</div></div>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:linear-gradient(to top,#d4c5e8,#e8dff4);"></div>Antes</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--purple);"></div>Com Nexum HD</div>
+        </div>
+      </div>
+    </div>
+    <!-- Case Studies -->
+    <div class="s-header"><div class="s-eyebrow">Casos de Sucesso</div><h3 class="s-title">Projetos que <em>geraram impacto</em> real</h3></div>
+    <div class="case-grid">
+
+      <!-- DESTINATUR -->
+      <div class="case-card">
+        <div class="case-video-wrap" id="video-wrap-0">
+          <div class="case-video-placeholder" onclick="document.getElementById('vid-input-0').click()">
+            <div class="vid-play-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="var(--purple)" stroke-width="1.5"/><polygon points="10,8 18,12 10,16" fill="var(--purple)"/></svg>
+            </div>
+            <div class="vid-label">Adicionar vídeo</div>
+            <div class="vid-sub">Cole o link do YouTube/Vimeo ou clique para fazer upload</div>
+          </div>
+          <div class="vid-url-row">
+            <input type="text" id="vid-url-0" class="vid-url-input" placeholder="https://youtube.com/watch?v=..." oninput="previewVideoUrl(0)">
+            <button class="vid-url-btn" onclick="previewVideoUrl(0)">▶ Pré-visualizar</button>
+          </div>
+          <input type="file" id="vid-input-0" accept="video/*" style="display:none" onchange="loadLocalVideo(this,0)">
+          <div class="vid-embed-wrap" id="vid-embed-0" style="display:none"></div>
+        </div>
+        <div class="case-body">
+          <div class="case-tag">Redes Sociais & Identidade Visual</div>
+          <div class="case-name">Destinatur</div>
+          <div class="case-desc">Empresa de excursões e turismo. Desenvolvimento de identidade visual, gestão de redes sociais e estratégia de comunicação digital para captar novos públicos e aumentar as reservas online.</div>
+          <div class="case-stats">
+            <div class="case-chip"><span class="up">▲</span> +280% seguidores</div>
+            <div class="case-chip"><span class="up">▲</span> +160% reservas online</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAVARES AZULEJARIA -->
+      <div class="case-card">
+        <div class="case-video-wrap" id="video-wrap-1">
+          <div class="case-video-placeholder" onclick="document.getElementById('vid-input-1').click()">
+            <div class="vid-play-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="var(--purple)" stroke-width="1.5"/><polygon points="10,8 18,12 10,16" fill="var(--purple)"/></svg>
+            </div>
+            <div class="vid-label">Adicionar vídeo</div>
+            <div class="vid-sub">Cole o link do YouTube/Vimeo ou clique para fazer upload</div>
+          </div>
+          <div class="vid-url-row">
+            <input type="text" id="vid-url-1" class="vid-url-input" placeholder="https://youtube.com/watch?v=..." oninput="previewVideoUrl(1)">
+            <button class="vid-url-btn" onclick="previewVideoUrl(1)">▶ Pré-visualizar</button>
+          </div>
+          <input type="file" id="vid-input-1" accept="video/*" style="display:none" onchange="loadLocalVideo(this,1)">
+          <div class="vid-embed-wrap" id="vid-embed-1" style="display:none"></div>
+        </div>
+        <div class="case-body">
+          <div class="case-tag">Identidade Visual & Auditoria Digital</div>
+          <div class="case-name">Tavares Azulejaria</div>
+          <div class="case-desc">Empresa de azulejaria artesanal portuguesa. Rebranding completo com investigação histórica do ofício, auditoria da presença digital e plano de comunicação para o mercado nacional e internacional.</div>
+          <div class="case-stats">
+            <div class="case-chip"><span class="up">▲</span> +195% tráfego web</div>
+            <div class="case-chip"><span class="up">▲</span> +3 mercados novos</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OS FARIAS -->
+      <div class="case-card">
+        <div class="case-video-wrap" id="video-wrap-2">
+          <div class="case-video-placeholder" onclick="document.getElementById('vid-input-2').click()">
+            <div class="vid-play-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="var(--purple)" stroke-width="1.5"/><polygon points="10,8 18,12 10,16" fill="var(--purple)"/></svg>
+            </div>
+            <div class="vid-label">Adicionar vídeo</div>
+            <div class="vid-sub">Cole o link do YouTube/Vimeo ou clique para fazer upload</div>
+          </div>
+          <div class="vid-url-row">
+            <input type="text" id="vid-url-2" class="vid-url-input" placeholder="https://youtube.com/watch?v=..." oninput="previewVideoUrl(2)">
+            <button class="vid-url-btn" onclick="previewVideoUrl(2)">▶ Pré-visualizar</button>
+          </div>
+          <input type="file" id="vid-input-2" accept="video/*" style="display:none" onchange="loadLocalVideo(this,2)">
+          <div class="vid-embed-wrap" id="vid-embed-2" style="display:none"></div>
+        </div>
+        <div class="case-body">
+          <div class="case-tag">Redes Sociais & Copywriting</div>
+          <div class="case-name">Os Farias — Roupas UMinho</div>
+          <div class="case-desc">Loja de roupa universitária da Universidade do Minho. Gestão de redes sociais, copywriting para campanhas sazonais e estratégia de conteúdo para captar estudantes e alumni.</div>
+          <div class="case-stats">
+            <div class="case-chip"><span class="up">▲</span> +420% engagement</div>
+            <div class="case-chip"><span class="up">▲</span> +230% vendas online</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES — 2×2 GRID STYLE -->
+<section class="services-bg" id="servicos">
+  <div class="container">
+    <div class="s-header center">
+      <h2 class="s-title" style="font-size:clamp(2rem,3.5vw,2.8rem);letter-spacing:-.02em;">Os Nossos Serviços</h2>
+      <p class="s-desc">Soluções feitas à medida para instituições culturais, empresas e projetos académicos — com metodologia própria e integração de IA responsável.</p>
+    </div>
+
+    <!-- 2×2 CARD GRID -->
+    <div class="svc-grid">
+
+      <!-- 1 — IDENTIDADE VISUAL -->
+      <div class="svc-card" onclick="openSvcModal('identidade')">
+        <div class="svc-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h3 class="svc-card-title">Identidade Visual Inteligente</h3>
+        <p class="svc-card-desc">Criamos identidades visuais únicas e culturalmente fundamentadas, combinando investigação histórica com ferramentas de design assistido por IA — sempre com supervisão humana especializada.</p>
+        <div class="svc-card-tags"><span class="chip">Logótipo</span><span class="chip">Manual de Marca</span><span class="chip">Figma</span><span class="chip">IA Generativa</span></div>
+        <div class="svc-card-footer">
+          <span class="svc-price-tag">A partir de <strong>€490</strong></span>
+          <span class="svc-arrow">Ver mais →</span>
+        </div>
+      </div>
+
+      <!-- 2 — AUDITORIA DIGITAL -->
+      <div class="svc-card" onclick="openSvcModal('auditoria')">
+        <div class="svc-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21l-4.35-4.35"/><circle cx="10.5" cy="10.5" r="7.5"/><path d="M10.5 7.5v3l2 2"/></svg>
+        </div>
+        <h3 class="svc-card-title">Auditoria Digital Automatizada</h3>
+        <p class="svc-card-desc">Diagnóstico completo da sua presença digital: website, SEO, redes sociais, acessibilidade e performance. Relatório executivo com plano de ação prioritizado e estimativas de ROI mensuráveis.</p>
+        <div class="svc-card-tags"><span class="chip">SEO</span><span class="chip">Performance</span><span class="chip">Analytics</span><span class="chip">Relatório ROI</span></div>
+        <div class="svc-card-footer">
+          <span class="svc-price-tag">A partir de <strong>€290</strong></span>
+          <span class="svc-arrow">Ver mais →</span>
+        </div>
+      </div>
+
+      <!-- 3 — REDES SOCIAIS -->
+      <div class="svc-card" onclick="openSvcModal('redes')">
+        <div class="svc-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </div>
+        <h3 class="svc-card-title">Gestão de Redes Sociais & Copywriting</h3>
+        <p class="svc-card-desc">Gerimos a sua presença digital com estratégia integrada em múltiplas plataformas e idiomas, combinando criação de conteúdo com IA supervisionada, calendário editorial e análise contínua de métricas.</p>
+        <div class="svc-card-tags"><span class="chip">Instagram</span><span class="chip">Copywriting PT/EN</span><span class="chip">Calendário</span><span class="chip">Analytics</span></div>
+        <div class="svc-card-footer">
+          <span class="svc-price-tag">A partir de <strong>€350</strong>/mês</span>
+          <span class="svc-arrow">Ver mais →</span>
+        </div>
+      </div>
+
+      <!-- 4 — AVATAR IA -->
+      <div class="svc-card" onclick="openSvcModal('avatar')">
+        <div class="svc-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <h3 class="svc-card-title">Avatar de Marca Permanente com IA</h3>
+        <p class="svc-card-desc">Criamos avatares digitais únicos com voz sintética personalizada e imagem coerente com a identidade visual. Produção de vídeos ilimitados sem custos de ator ou estúdio, disponível em múltiplos idiomas.</p>
+        <div class="svc-card-tags"><span class="chip">HeyGen</span><span class="chip">ElevenLabs</span><span class="chip">Voz Sintética</span><span class="chip">Multilingue</span></div>
+        <div class="svc-card-footer">
+          <span class="svc-price-tag">A partir de <strong>€790</strong></span>
+          <span class="svc-arrow">Ver mais →</span>
+        </div>
+      </div>
+
+    </div><!-- /svc-grid -->
+
+    <!-- CTA abaixo dos cards -->
+    <div style="text-align:center;margin-top:2.5rem;">
+      <button class="btn-pp" style="width:auto;padding:.8rem 2.5rem;font-size:.9rem;" onclick="document.getElementById('precos').scrollIntoView({behavior:'smooth'})">Ver Planos e Preços →</button>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE MODAL OVERLAY -->
+<div id="svc-overlay" style="display:none;position:fixed;inset:0;background:rgba(20,10,40,.55);backdrop-filter:blur(6px);z-index:900;align-items:center;justify-content:center;padding:1.5rem;" onclick="closeSvcModal(event)">
+  <div id="svc-modal" style="background:#fff;border-radius:var(--r-lg);max-width:860px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(20,10,40,.35);position:relative;" onclick="event.stopPropagation()">
+    <button onclick="closeSvcModal()" style="position:absolute;top:1rem;right:1rem;background:var(--bg-soft);border:1px solid var(--border);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1.1rem;color:var(--text-muted);display:flex;align-items:center;justify-content:center;z-index:2;">✕</button>
+    <div id="svc-modal-content"></div>
+  </div>
+</div>
+
+<!-- PORTFOLIO -->
+<section class="port-bg" id="portfolio">
+  <div class="container">
+    <div class="s-header center"><div class="s-eyebrow">Portfólio</div><h2 class="s-title">Projetos Académicos e <em>Protótipos</em></h2><p class="s-desc">Estudos de caso, projetos académicos e protótipos desenvolvidos no âmbito do Mestrado em Humanidades Digitais, demonstrando as nossas competências técnicas e criativas.</p></div>
+    <div class="port-grid">
+      <div class="port-card"><div class="port-img" style="background:linear-gradient(135deg,#e8e0f5,#d4c5e8);">🏛️</div><div class="port-body"><div class="port-tag">Arquivo Digital</div><div class="port-name">Acervo Histórico de Braga</div><div class="port-desc">Digitalização e criação de plataforma interativa para exploração de documentos do século XVIII.</div></div></div>
+      <div class="port-card"><div class="port-img" style="background:linear-gradient(135deg,#e0d4f0,#d0c0e8);">🎨</div><div class="port-body"><div class="port-tag">Exposição Virtual</div><div class="port-name">Museu Interativo 360°</div><div class="port-desc">Desenvolvimento de interface UX/UI para visitação imersiva de uma galeria de arte local.</div></div></div>
+      <div class="port-card"><div class="port-img" style="background:linear-gradient(135deg,#dce8f5,#c8d8f0);">📊</div><div class="port-body"><div class="port-tag">Análise de Dados</div><div class="port-name">Mapeamento Cultural</div><div class="port-desc">Recolha e visualização de dados sobre o impacto de eventos culturais na região do Minho.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section style="background:var(--bg)" id="precos">
+  <div class="container">
+    <div class="s-header center"><div class="s-eyebrow">Preços</div><h2 class="s-title">Planos para cada <em>necessidade</em></h2><p class="s-desc">Transparência total nos preços. Sem surpresas, sem letras pequenas.</p></div>
+    <div class="pricing-grid">
+      <div class="p-card"><div class="p-tier">Startup</div><div class="p-name">Essencial</div><div class="p-price">€490 <span>/ projeto</span></div><p class="p-desc">Para organizações a iniciar a transformação digital.</p><ul class="p-feats"><li><span class="ck">✓</span>1 serviço à escolha</li><li><span class="ck">✓</span>Diagnóstico inicial incluído</li><li><span class="ck">✓</span>2 rondas de revisão</li><li><span class="ck">✓</span>Suporte 15 dias</li><li><span class="ck">✓</span>Documentação básica</li></ul><button class="btn-ppg" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Saber Mais</button></div>
+      <div class="p-card featured"><div class="p-badge">Mais Popular</div><div class="p-tier">Professional</div><div class="p-name">Crescimento</div><div class="p-price">€990 <span>/ projeto</span></div><p class="p-desc">Para organizações com necessidades digitais abrangentes.</p><ul class="p-feats"><li><span class="ck">✓</span>Até 2 serviços combinados</li><li><span class="ck">✓</span>Estratégia digital integrada</li><li><span class="ck">✓</span>4 rondas de revisão</li><li><span class="ck">✓</span>Suporte 30 dias</li><li><span class="ck">✓</span>Formação da equipa</li><li><span class="ck">✓</span>Relatório de impacto mensal</li></ul><button class="btn-pp" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Escolher Plano</button></div>
+      <div class="p-card"><div class="p-tier">Enterprise</div><div class="p-name">Parceria</div><div class="p-price" style="font-size:1.4rem;">Sob Consulta <span>/ trimestre</span></div><p class="p-desc">Para instituições com necessidades complexas e parceria de longo prazo.</p><ul class="p-feats"><li><span class="ck">✓</span>Todos os serviços</li><li><span class="ck">✓</span>Gestor de conta dedicado</li><li><span class="ck">✓</span>Revisões ilimitadas</li><li><span class="ck">✓</span>Suporte prioritário contínuo</li><li><span class="ck">✓</span>SLA garantido</li><li><span class="ck">✓</span>Relatórios ROI trimestrais</li></ul><button class="btn-ppg" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Contactar Equipa</button></div>
+    </div>
+    <div style="margin-top:2rem;background:var(--purple-tint);border:1.5px solid var(--border-strong);border-radius:var(--r-lg);padding:1.75rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;"><div style="font-size:1.5rem;">🎁</div><div style="flex:1;min-width:200px;"><div style="font-weight:700;font-size:.9rem;color:var(--purple-deep);margin-bottom:.25rem;">Diagnóstico Digital Gratuito</div><div style="font-size:.82rem;color:var(--text-muted);">Para novas instituições culturais e câmaras — diagnóstico inicial sem custos nem compromisso.</div></div><button class="btn-pp" style="width:auto;padding:.75rem 1.5rem;white-space:nowrap;flex-shrink:0;" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Solicitar Agora</button></div>
+  </div>
+</section>
+
+<!-- EQUIPA -->
+<section class="team-bg" id="equipa">
+  <div class="container">
+    <div class="s-header center"><div class="s-eyebrow">A Nossa Equipa</div><h2 class="s-title">Conheça o <em>Nosso Talento</em></h2><p class="s-desc">Mestrandos em Humanidades Digitais da Universidade do Minho, organizados em áreas estratégicas com competências técnicas, analíticas e criativas.</p></div>
+    <div class="team-grid">
+      <!-- GUILHERME -->
+      <div class="team-card">
+        <div class="photo-wrap">
+          <div class="photo-circle" onclick="document.getElementById('up0').click()">
+            <img id="pimg0" alt="Guilherme"/>
+            <div class="photo-ph" style="background:#f5e8e9;">
+              <div class="ph-icon" style="color:var(--wine);">📷</div>
+              <div class="ph-text" style="color:var(--wine);">Foto</div>
+            </div>
+          </div>
+          <label class="upload-btn" for="up0" title="Adicionar foto"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><path d="M7 2v10M2 7h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></label>
+          <input type="file" id="up0" class="upload-input" accept="image/*" onchange="loadPh(this,0)">
+        </div>
+        <div class="team-name">Guilherme</div><div class="team-role">Líder</div><div class="team-area">Estratégia & Direção</div>
+      </div>
+      <!-- PATRICK -->
+      <div class="team-card">
+        <div class="photo-wrap">
+          <div class="photo-circle" onclick="document.getElementById('up1').click()">
+            <img id="pimg1" alt="Patrick"/>
+            <div class="photo-ph" style="background:var(--purple-tint2);">
+              <div class="ph-icon">📷</div><div class="ph-text">Foto</div>
+            </div>
+          </div>
+          <label class="upload-btn" for="up1" title="Adicionar foto"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><path d="M7 2v10M2 7h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></label>
+          <input type="file" id="up1" class="upload-input" accept="image/*" onchange="loadPh(this,1)">
+        </div>
+        <div class="team-name">Patrick</div><div class="team-role">Desenvolvedor</div><div class="team-area">Tecnologia & Dev</div>
+      </div>
+      <!-- DEOMÉTRIO -->
+      <div class="team-card">
+        <div class="photo-wrap">
+          <div class="photo-circle" onclick="document.getElementById('up2').click()">
+            <img id="pimg2" alt="Deométrio"/>
+            <div class="photo-ph" style="background:var(--purple-tint2);">
+              <div class="ph-icon">📷</div><div class="ph-text">Foto</div>
+            </div>
+          </div>
+          <label class="upload-btn" for="up2" title="Adicionar foto"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><path d="M7 2v10M2 7h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></label>
+          <input type="file" id="up2" class="upload-input" accept="image/*" onchange="loadPh(this,2)">
+        </div>
+        <div class="team-name">Deométrio</div><div class="team-role">Finanças</div><div class="team-area">Gestão Financeira</div>
+      </div>
+      <!-- RODRIGO -->
+      <div class="team-card">
+        <div class="photo-wrap">
+          <div class="photo-circle" onclick="document.getElementById('up3').click()">
+            <img id="pimg3" alt="Rodrigo"/>
+            <div class="photo-ph" style="background:var(--purple-tint2);">
+              <div class="ph-icon">📷</div><div class="ph-text">Foto</div>
+            </div>
+          </div>
+          <label class="upload-btn" for="up3" title="Adicionar foto"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><path d="M7 2v10M2 7h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></label>
+          <input type="file" id="up3" class="upload-input" accept="image/*" onchange="loadPh(this,3)">
+        </div>
+        <div class="team-name">Rodrigo</div><div class="team-role">Webdesign</div><div class="team-area">Design & UX/UI</div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:2rem;font-size:.8rem;color:var(--text-muted);">Clique no círculo ou no ícone <strong style="color:var(--purple);">+</strong> para adicionar a foto de cada membro.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--bg)">
+  <div class="container">
+    <div class="s-header center"><div class="s-eyebrow">Testemunhos</div><h2 class="s-title">O que dizem sobre <em>os nossos serviços</em></h2></div>
+    <div class="test-grid">
+      <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">"A auditoria digital revelou problemas que desconhecíamos. Em 3 meses melhorámos o tráfego orgânico em 47%. Equipa extremamente profissional."</p><div class="t-author"><div class="t-avatar" style="background:#f5ecf8;color:#9064ab;">PC</div><div><div class="t-name">Pedro Carvalho</div><div class="t-role">Diretor Digital, Câmara Municipal</div></div></div></div>
+      <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">"A nova identidade visual capturou perfeitamente a essência da nossa coleção. Recebemos imenso feedback positivo desde o relançamento."</p><div class="t-author"><div class="t-avatar" style="background:#8A2A30;color:#fff;">FM</div><div><div class="t-name">Filipa Moreira</div><div class="t-role">Curadora, Espaço Arte Minho</div></div></div></div>
+      <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">"O avatar de marca transformou a nossa comunicação. Estamos em 4 idiomas sem custos adicionais. Uma solução verdadeiramente inovadora."</p><div class="t-author"><div class="t-avatar" style="background:#f5ecf8;color:#9064ab;">SR</div><div><div class="t-name">Sara Ramos</div><div class="t-role">Gestora Cultural, Fundação Norte</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container" style="max-width:1200px;margin:0 auto;">
+    <h2>Pronto para crescer connosco?</h2>
+    <p>Diagnóstico inicial gratuito e sem compromisso. Respondemos em menos de 24 horas.</p>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Enviar Mensagem</button>
+      <a class="btn-ghost-white" href="https://wa.me/351000000000" target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact-bg" id="contacto">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="s-eyebrow">Contacto</div>
+        <h2 class="s-title">Vamos <em>conversar</em><br>sobre o seu projeto</h2>
+        <p style="font-size:.95rem;color:var(--text-muted);line-height:1.8;margin-bottom:2rem;">Preencha o formulário e a equipa Nexum HD entrará em contacto com uma proposta personalizada.</p>
+        <div class="c-item"><div class="c-icon">📧</div><div><div class="c-lbl">Email</div><div class="c-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="214f4459544c494561544c484f494e0f5155">[email&#160;protected]</a></div></div></div>
+        <div class="c-item"><div class="c-icon">📍</div><div><div class="c-lbl">Localização</div><div class="c-val">Universidade do Minho — Braga</div></div></div>
+        <div class="c-item"><div class="c-icon">⏱️</div><div><div class="c-lbl">Resposta garantida</div><div class="c-val">Menos de 24h nos dias úteis</div></div></div>
+        <div class="social-row">
+          <a class="soc-a" href="#">in</a><a class="soc-a" href="#">ig</a><a class="soc-a" href="#">tt</a>
+          <a class="soc-a" href="https://wa.me/351000000000" target="_blank" style="background:#f0fdf4;border-color:#bbf7d0;color:#16a34a;">wa</a>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="success-msg" id="success-msg"><div style="font-size:1.5rem;margin-bottom:.5rem;">✅</div><div style="font-weight:700;color:#16a34a;margin-bottom:.25rem;">Mensagem enviada!</div><div style="font-size:.85rem;color:#15803d;">Entraremos em contacto em menos de 24 horas.</div></div>
+        <h3>Envie-nos uma mensagem</h3>
+        <div class="f-row"><div class="f-g"><label class="f-lbl">Nome *</label><input id="fname" type="text" class="f-inp" placeholder="O seu nome"></div><div class="f-g"><label class="f-lbl">Email *</label><input id="femail" type="email" class="f-inp" placeholder="email@exemplo.com"></div></div>
+        <div class="f-g"><label class="f-lbl">Organização</label><input type="text" class="f-inp" placeholder="Nome da sua instituição ou empresa"></div>
+        <div class="f-g"><label class="f-lbl">Serviço de Interesse</label><select id="fservice" class="f-inp"><option value="">Selecione um serviço</option><option>Identidade Visual Inteligente</option><option>Auditoria Digital Automatizada</option><option>Gestão de Redes Sociais & Copywriting</option><option>Avatar de Marca com IA</option><option>Parceria Académica</option><option>Outro</option></select></div>
+        <div class="f-g"><label class="f-lbl">Mensagem *</label><textarea class="f-inp" rows="4" placeholder="Descreva o seu projeto e objetivos..."></textarea></div>
+        <div style="display:flex;gap:.6rem;align-items:flex-start;margin-bottom:1.25rem;"><input type="checkbox" id="gdpr" style="width:auto;margin-top:3px;flex-shrink:0;accent-color:var(--purple);"><label for="gdpr" style="font-size:.78rem;color:var(--text-muted);line-height:1.5;cursor:pointer;">Concordo com a política de privacidade e com o tratamento dos dados para fins de contacto.</label></div>
+        <button class="btn-full" onclick="submitForm()">Enviar Mensagem →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="f-logo">
+      <svg width="36" height="36" viewBox="0 0 100 100" fill="none"><path d="M18 85 L18 35 L50 75 L50 25" stroke="rgba(255,255,255,.7)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 25 L82 65 L82 15" stroke="rgba(255,255,255,.7)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M68 15 L84 15 L84 31" stroke="rgba(255,255,255,.7)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><div class="f-logo-name">NEXUM HD</div><div class="f-logo-sub">Humanidades Digitais · UMinho</div></div>
+    </div>
+    <div class="f-links"><a href="#">Início</a><a href="#">Quem Somos</a><a href="#servicos">Serviços</a><a href="#portfolio">Portfólio</a><a href="#equipa">Equipa</a><a href="#contacto">Contacto</a></div>
+    <div style="font-size:.78rem;color:rgba(255,255,255,.4);font-style:italic;">"Onde Cultura encontra Tecnologia."</div>
+  </div>
+  <div class="footer-bottom"><div>© 2025 Nexum HD · Startup do Mestrado em Humanidades Digitais · Universidade do Minho</div><div>Termos · Privacidade · Política de IA</div></div>
+</footer>
+
+<a class="wa-btn" href="https://wa.me/351000000000" target="_blank" title="WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<script>
+function preselectService(n){const s=document.getElementById('fservice');if(s)for(let o of s.options)if(o.text===n){o.selected=true;break}document.getElementById('contacto').scrollIntoView({behavior:'smooth'})}
+function submitForm(){const n=document.getElementById('fname').value.trim(),e=document.getElementById('femail').value.trim();if(!n||!e){alert('Por favor preencha o nome e o email.');return}if(!document.getElementById('gdpr').checked){alert('Por favor aceite a política de privacidade.');return}document.getElementById('success-msg').style.display='block';document.getElementById('contacto').scrollIntoView({behavior:'smooth'})}
+function loadPh(input,idx){if(!input.files||!input.files[0])return;const r=new FileReader();r.onload=e=>{const img=document.getElementById('pimg'+idx);img.src=e.target.result;img.classList.add('loaded');img.nextElementSibling.style.display='none'};r.readAsDataURL(input.files[0])}
+function animVal(el,target,dur){let s=0,step=target/(dur/16);const t=setInterval(()=>{s+=step;if(s>=target){s=target;clearInterval(t)}el.textContent=Math.floor(s)},16)}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-target]').forEach(el=>animVal(el,parseInt(el.dataset.target),1400));obs.unobserve(e.target)}})},{threshold:.3});
+document.querySelectorAll('.hero-stats-card,.hero-stat,.metric-card').forEach(el=>obs.observe(el));
+const fadeObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}})},{threshold:.08});
+document.querySelectorAll('.p-card,.test-card,.port-card,.case-card,.metric-card,.team-card,.svc-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .5s ease,transform .5s ease';fadeObs.observe(el)});
+
+// ── SERVICE MODAL DATA
+const svcData = {
+  identidade:{tag:'🎨 Identidade Visual',title:'Identidade Visual <em>Inteligente</em>',lead:'Criamos identidades visuais únicas e culturalmente fundamentadas, combinando investigação histórica com ferramentas de design assistido por IA — sempre com supervisão humana especializada.',details:[{icon:'🎯',label:'Problema que Resolve',text:'Organizações com identidades desatualizadas perdem visibilidade e credibilidade junto dos seus públicos.'},{icon:'👥',label:'Público-Alvo',text:'Museus, câmaras, fundações, artesãos, artistas e PMEs do setor cultural.'},{icon:'⚙️',label:'Tecnologias',text:'Midjourney, Adobe Firefly, Figma, Adobe Creative Suite.'},{icon:'✨',label:'Valor Acrescentado',text:'Identidade única e culturalmente fundamentada. Manual completo. Todas as aplicações incluídas.'}],feats:['Pesquisa histórica e cultural da organização','Logótipo principal + variações (horizontal, ícone, negativo)','Paleta cromática com justificação cultural','Sistema tipográfico completo','Manual de identidade visual (PDF + editável)','Aplicações em todos os suportes digitais','Ficheiros finais em todos os formatos'],chips:['Figma','Adobe Illustrator','Midjourney','Adobe Firefly','Canva Pro'],price:'€490',unit:'/ projeto',svcName:'Identidade Visual Inteligente',sidebar:['Logótipo + manual de identidade','Paleta e tipografia','Aplicações digitais','2 rondas de revisão','Todos os formatos finais','Suporte 30 dias']},
+  auditoria:{tag:'🔍 Diagnóstico Digital',title:'Auditoria Digital <em>Automatizada</em>',lead:'Diagnóstico completo da sua presença digital: website, SEO, redes sociais, acessibilidade e performance. Relatório com plano de ação prioritizado e estimativas de ROI mensuráveis.',details:[{icon:'🎯',label:'Problema que Resolve',text:'Organizações sem dados sobre a sua presença digital perdem oportunidades por falta de diagnóstico estratégico.'},{icon:'👥',label:'Público-Alvo',text:'Câmaras municipais, museus, startups criativas e PMEs com presença digital.'},{icon:'⚙️',label:'Tecnologias',text:'SEMrush, Screaming Frog, Google Analytics 4, Lighthouse, análise automática de redes sociais.'},{icon:'✨',label:'Valor Acrescentado',text:'Relatório executivo completo, mapa de oportunidades prioritizadas e estimativas de ROI.'}],feats:['Análise SEO técnico e de conteúdo','Performance (Core Web Vitals, velocidade, mobile)','Acessibilidade digital (WCAG 2.1)','Análise de redes sociais e concorrência','Relatório executivo com prioridades e ROI estimado','Reunião de apresentação dos resultados'],chips:['SEMrush','Google Analytics 4','Screaming Frog','Lighthouse','Ahrefs'],price:'€290',unit:'/ relatório',svcName:'Auditoria Digital Automatizada',sidebar:['Auditoria SEO + Performance','Análise redes sociais','Relatório executivo PDF','Plano de ação priorizado','Reunião de apresentação','Estimativas de ROI']},
+  redes:{tag:'📣 Comunicação Digital',title:'Redes Sociais, <em>Copywriting</em> & Estratégia Multilingue',lead:'Gerimos a sua presença digital com estratégia integrada em múltiplas plataformas e idiomas, combinando criação de conteúdo com IA supervisionada e análise contínua de métricas.',details:[{icon:'🎯',label:'Problema que Resolve',text:'Falta de consistência na comunicação digital resulta em baixo engagement e perda de audiências.'},{icon:'👥',label:'Público-Alvo',text:'Museus, festivais, centros culturais, artistas e PMEs criativas.'},{icon:'⚙️',label:'Tecnologias',text:'Meta Business Suite, Buffer, Canva Pro, Claude AI, DeepL Pro para multilinguismo.'},{icon:'✨',label:'Valor Acrescentado',text:'Presença ativa em PT/EN/ES. Calendário editorial. Relatórios mensais de performance.'}],feats:['Estratégia editorial mensal personalizada','12 a 20 posts/stories por mês','Copywriting cultural em PT e EN','Calendário editorial com agendamento automático','Gestão de comentários e mensagens','Relatório mensal com métricas e recomendações'],chips:['Meta Business Suite','Buffer','Canva Pro','DeepL Pro','Claude AI'],price:'€350',unit:'/ mês',svcName:'Gestão de Redes Sociais & Copywriting',sidebar:['Até 2 plataformas','12 posts + stories/mês','Copy PT + EN','Calendário editorial','Relatório mensal','Gestão de comunidade']},
+  avatar:{tag:'🎬 Audiovisual com IA',title:'Avatar de Marca <em>Permanente</em> com IA',lead:'Criamos avatares digitais únicos com voz sintética personalizada e imagem coerente com a identidade visual. Vídeos ilimitados sem custos de ator ou estúdio, disponível em múltiplos idiomas.',details:[{icon:'🎯',label:'Problema que Resolve',text:'Custos elevados de produção audiovisual e necessidade de comunicação escalável em múltiplos idiomas.'},{icon:'👥',label:'Público-Alvo',text:'Museus com tours virtuais, organizações com comunicação multilingue e criadores de conteúdo.'},{icon:'⚙️',label:'Tecnologias',text:'HeyGen, Synthesia, ElevenLabs (síntese de voz), Adobe Premiere, modelos de geração de vídeo.'},{icon:'✨',label:'Valor Acrescentado',text:'Avatar único. Vídeos ilimitados. Disponível em múltiplos idiomas. ROI comprovável em 90 dias.'}],feats:['Avatar personalizado e único','Síntese de voz customizada em PT/EN/ES','5 vídeos de demonstração incluídos','Tours virtuais, formação e comunicação institucional','Guia completo de utilização','Suporte 60 dias pós-entrega'],chips:['HeyGen','Synthesia','ElevenLabs','Adobe Premiere','Runway ML'],price:'€790',unit:'/ projeto',svcName:'Avatar de Marca com IA',sidebar:['Avatar personalizado único','Síntese de voz customizada','5 vídeos de demonstração','Disponível em 3 idiomas','Guia de utilização','Suporte 60 dias']}
+};
+
+function openSvcModal(id) {
+  const d = svcData[id];
+  const detailHTML = d.details.map(x=>`<div class="detail-box"><div class="detail-label">${x.icon} ${x.label}</div><div class="detail-text">${x.text}</div></div>`).join('');
+  const featHTML = d.feats.map(f=>`<li>${f}</li>`).join('');
+  const chipHTML = d.chips.map(c=>`<span class="chip">${c}</span>`).join('');
+  const sideHTML = d.sidebar.map(s=>`<li><span class="ck">✓</span>${s}</li>`).join('');
+  document.getElementById('svc-modal-content').innerHTML = `
+    <div class="modal-inner">
+      <div class="modal-grid">
+        <div>
+          <div class="modal-svc-tag">${d.tag}</div>
+          <h3 class="modal-title">${d.title}</h3>
+          <p class="modal-lead">${d.lead}</p>
+          <div class="detail-grid">${detailHTML}</div>
+          <h4 style="font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:.9rem;">Incluído no serviço</h4>
+          <ul class="feat-list">${featHTML}</ul>
+          <div class="tech-chips">${chipHTML}</div>
+        </div>
+        <div>
+          <div class="sidebar-card">
+            <div class="sidebar-header"><h4>${d.tag.split(' ').slice(1).join(' ')}</h4><p>Plano Essencial</p><span class="sidebar-from">A partir de</span><div class="sidebar-price">${d.price} <span>${d.unit}</span></div></div>
+            <div class="sidebar-body">
+              <ul class="sidebar-feats">${sideHTML}</ul>
+              <button class="btn-full" onclick="preselectService('${d.svcName}');closeSvcModal()">Solicitar Proposta →</button>
+              <button class="btn-full-ghost" onclick="closeSvcModal();setTimeout(()=>document.getElementById('precos').scrollIntoView({behavior:'smooth'}),200)">Ver Todos os Planos</button>
+              <div class="sidebar-note">🔒 Proposta sem compromisso · 24h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  const overlay = document.getElementById('svc-overlay');
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeSvcModal(e) {
+  if(e && e.target !== document.getElementById('svc-overlay')) return;
+  document.getElementById('svc-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// ── VIDEO FUNCTIONS
+function getYouTubeId(url){const m=url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))(\w[\w-]{10})/);return m?m[1]:null}
+function getVimeoId(url){const m=url.match(/vimeo\.com\/(\d+)/);return m?m[1]:null}
+function previewVideoUrl(idx) {
+  const url = document.getElementById('vid-url-'+idx).value.trim();
+  if(!url) return;
+  const embedWrap = document.getElementById('vid-embed-'+idx);
+  const placeholder = document.querySelector('#video-wrap-'+idx+' .case-video-placeholder');
+  const urlRow = document.querySelector('#video-wrap-'+idx+' .vid-url-row');
+  const ytId = getYouTubeId(url);
+  const viId = getVimeoId(url);
+  let embedHTML = '';
+  if(ytId) embedHTML = `<iframe src="https://www.youtube.com/embed/${ytId}" allowfullscreen></iframe>`;
+  else if(viId) embedHTML = `<iframe src="https://player.vimeo.com/video/${viId}" allowfullscreen></iframe>`;
+  else { alert('URL não reconhecido. Use um link do YouTube ou Vimeo.'); return; }
+  embedWrap.innerHTML = embedHTML;
+  embedWrap.style.display = 'block';
+  placeholder.style.display = 'none';
+  urlRow.style.display = 'none';
+}
+function loadLocalVideo(input, idx) {
+  if(!input.files||!input.files[0]) return;
+  const url = URL.createObjectURL(input.files[0]);
+  const embedWrap = document.getElementById('vid-embed-'+idx);
+  const placeholder = document.querySelector('#video-wrap-'+idx+' .case-video-placeholder');
+  const urlRow = document.querySelector('#video-wrap-'+idx+' .vid-url-row');
+  embedWrap.innerHTML = `<video src="${url}" controls></video>`;
+  embedWrap.style.display = 'block';
+  placeholder.style.display = 'none';
+  urlRow.style.display = 'none';
+}
+</script>
+</body>
+</html>
